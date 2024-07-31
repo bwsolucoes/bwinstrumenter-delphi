@@ -20,10 +20,10 @@ type
     fNameThreadForDebugging: string;
     fAppendUses: string;
     fCreateUses: string;
-    // >> BW Soluções - Alisson - 15/08/2023
+    // >> Modificado: 15/08/2023
     fAppendUsesSysUtils: string;
     fCreateUsesSysUtils: string;
-    // << BW Soluções - Alisson - 15/08/2023
+    // << Modificado: 15/08/2023
     fIntegratorEnterProcess: string;
     fIntegratorExitProcess: string;
     fIntegratorEnterAsm: string;
@@ -59,10 +59,10 @@ type
     property prNameThreadForDebugging: string read fNameThreadForDebugging;
     property prAppendUses: string read fAppendUses;
     property prCreateUses: string read fCreateUses;
-    // >> BW Soluções - Alisson - 15/08/2023
+    // >> Modificado: 15/08/2023
     property prAppendUsesSysUtils: string read fAppendUsesSysUtils;
     property prCreateUsesSysUtils: string read fCreateUsesSysUtils;
-    // << BW Soluções - Alisson - 15/08/2023
+    // << Modificado: 15/08/2023
     property prIntegratorEnterProcess: string read fIntegratorEnterProcess;
     property prIntegratorExitProcess: string read fIntegratorExitProcess;
     property prIntegratorEnterAsm: string read fIntegratorEnterAsm;
@@ -136,9 +136,11 @@ begin
         fConditStart := '{>>BWIntegrator}';
         fConditStartUses := '{>>BWIntegrator U}';
         fConditStartAPI := '{>>BWIntegrator API}';
-        fConditEnd := '{BWIntegrator>>}';
-        fConditEndUses := '{BWIntegrator U>>}';
-        fConditEndAPI := '{BWIntegrator API>>}';
+        // >> Modificado: 11/07/2024
+        fConditEnd := '{BWIntegrator<<}';
+        fConditEndUses := '{BWIntegrator U<<}';
+        fConditEndAPI := '{BWIntegrator API<<}';
+        // << Modificado: 11/07/2024
       end;
     Ct_IfDef:
       begin
@@ -152,19 +154,19 @@ begin
   end;
   fAppendUses := prConditStartUses + ' ' + cProfUnitName + ', ' + prConditEndUses;
   fCreateUses := prConditStartUses + ' uses ' + cProfUnitName + '; ' + prConditEndUses;
-  // >> BW Soluções - Alisson - 15/08/2023
+  // >> Modificado: 15/08/2023
   fAppendUsesSysUtils := prConditStartUses + ' ' + cProfUnitName + ', ' + cProfUnitSysUtils + ', ' + prConditEndUses;
   fCreateUsesSysUtils := prConditStartUses + ' uses ' + cProfUnitName + ', ' + cProfUnitSysUtils + '; ' + prConditEndUses;
-  // << BW Soluções - Alisson - 15/08/2023
-  // >> BW Soluções - Alisson - 07/07/2023
+  // << Modificado: 15/08/2023
+  // >> Modificado: 07/07/2023
 //  fProfileEnterProc := prConditStart + ' ' + 'ProfilerEnterProc(%d); try ' + prConditEnd;
   fIntegratorEnterProcess := prConditStart + ' ' + 'IntegratorEnterProcess(%d); try try ' + prConditEnd;
 //  fProfileExitProc := prConditStart + ' finally ProfilerExitProc(%d); end; ' + prConditEnd;
 //  fIntegratorExitProc := prConditStart + ' finally IntegratorExitProc(%d); end; except on e: Exception do begin IntegratorHandleException(%d, e); raise e; end; end; ' + prConditEnd;
-  // << BW Soluções - Alisson - 07/07/2023
-  // >> BW Soluções - Alisson - 08/08/2023
+  // << Modificado: 07/07/2023
+  // >> Modificado: 08/08/2023
   fIntegratorExitProcess := prConditStart + ' finally IntegratorExitProcess(%d); end; except on e: Exception do begin IntegratorHandleException(%d, e); end; end; ' + prConditEnd;
-  // << BW Soluções - Alisson - 08/08/2023
+  // << Modificado: 08/08/2023
   fIntegratorEnterAsm := prConditStart +
     ' pushad; mov eax, %d; call IntegratorEnterProcess; popad ' + prConditEnd;
   fIntegratorExitAsm := prConditStart +

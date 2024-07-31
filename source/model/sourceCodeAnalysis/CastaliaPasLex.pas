@@ -109,7 +109,7 @@ type
     function Func15: TptTokenKind;
     function Func19: TptTokenKind;
     function Func20: TptTokenKind;
-	function Func21: TptTokenKind;
+    function Func21: TptTokenKind;
     function Func23: TptTokenKind;
     function Func25: TptTokenKind;
     function Func27: TptTokenKind;
@@ -208,9 +208,13 @@ type
     procedure SetRunPos(Value: Integer);
     procedure MakeMethodTables;
     procedure AddressOpProc;
-    {$IFDEF D8_NEWER} //JThurman 2004-04-06
+    // >> Modificado: 11/07/2024
+    //{$IFDEF D8_NEWER} //JThurman 2004-04-06
+    // << Modificado: 11/07/2024
     procedure AmpersandOpProc;
-    {$ENDIF}
+    // >> Modificado: 11/07/2024
+    //{$ENDIF}
+    // << Modificado: 11/07/2024
     procedure AsciiCharProc;
     procedure AnsiProc;
     procedure BorProc;
@@ -495,7 +499,7 @@ begin
 	  19: fIdentFuncTable[I] := Func19;
       20: fIdentFuncTable[I] := Func20;
       21: fIdentFuncTable[I] := Func21;
-	  23: fIdentFuncTable[I] := Func23;
+      23: fIdentFuncTable[I] := Func23;
       25: fIdentFuncTable[I] := Func25;
       27: fIdentFuncTable[I] := Func27;
       28: fIdentFuncTable[I] := Func28;
@@ -606,6 +610,10 @@ var
   I: Integer;
   Temp: PAnsiChar;
 begin
+  // >> Modificado: 11/07/2024
+  if aKey = '&End' then
+    Result := True;
+  // << Modificado: 11/07/2024
   if Length(aKey) = TokenLen then
   begin
     Temp := fOrigin + fTokenPos;
@@ -1285,8 +1293,8 @@ begin
   for I := #0 to #255 do
     case I of
       #0: fProcTable[I] := NullProc;
-	  #10: fProcTable[I] := LFProc;
-	  #13: fProcTable[I] := CRProc;
+      #10: fProcTable[I] := LFProc;
+      #13: fProcTable[I] := CRProc;
       #1..#9, #11, #12, #14..#32:
         fProcTable[I] := SpaceProc;
       '#': fProcTable[I] := AsciiCharProc;
@@ -1303,7 +1311,7 @@ begin
             '(': fProcTable[I] := RoundOpenProc;
             ')': fProcTable[I] := RoundCloseProc;
             '*': fProcTable[I] := StarProc;
-			'+': fProcTable[I] := PlusProc;
+            '+': fProcTable[I] := PlusProc;
             ',': fProcTable[I] := CommaProc;
             '-': fProcTable[I] := MinusProc;
             '.': fProcTable[I] := PointProc;
@@ -1316,16 +1324,20 @@ begin
             '@': fProcTable[I] := AddressOpProc;
             '[': fProcTable[I] := SquareOpenProc;
             ']': fProcTable[I] := SquareCloseProc;
-			'^': fProcTable[I] := PointerSymbolProc;
-			'"': fProcTable[I] := StringDQProc; // DR 2002-01-14
-      {$IFDEF D8_NEWER} //JThurman 2004-04-06
-      '&': fProcTable[I] := AmpersandOpProc;
-      {$ENDIF}
+            '^': fProcTable[I] := PointerSymbolProc;
+            '"': fProcTable[I] := StringDQProc; // DR 2002-01-14
+          // >> Modificado: 11/07/2024
+          //{$IFDEF D8_NEWER} //JThurman 2004-04-06
+          // << Modificado: 11/07/2024
+            '&': fProcTable[I] := AmpersandOpProc;
+          // >> Modificado: 11/07/2024
+          //{$ENDIF}
+          // << Modificado: 11/07/2024
           else fProcTable[I] := SymbolProc;
           end;
         end;
     else fProcTable[I] := UnknownProc;
-    end;
+  end;
 end;
 
 constructor TmwBasePasLex.Create;
@@ -2784,7 +2796,9 @@ begin
 	inc(Run);
 end;
 
-{$IFDEF D8_NEWER} //JThurman 2004-04-06
+// >> Modificado: 11/07/2024
+//{$IFDEF D8_NEWER} //JThurman 2004-04-06
+// << Modificado: 11/07/2024
 procedure TmwBasePasLex.AmpersandOpProc;
 begin
   FTokenID := ptAmpersand;
@@ -2793,7 +2807,9 @@ begin
     inc(Run);
   FTokenID := ptIdentifier;
 end;
-{$ENDIF}
+// >> Modificado: 11/07/2024
+//{$ENDIF}
+// << Modificado: 11/07/2024
 
 initialization
   MakeIdentTable;

@@ -1320,12 +1320,12 @@ begin { TUnit.Instrument }
           LFileEdit.Insert(pr.prStartOffset + Length('asm'),
             Format(fProject.prIntegratorEnterAsm, [nameId]))
         else
-          // >> BW Soluções - Alisson - 07/07/2023
+          // >> Modificado: 07/07/2023
 //          LFileEdit.Insert(pr.prStartOffset + Length('begin'),
 //            Format(fProject.prProfileEnterProc, [nameId]));
           LFileEdit.Insert(pr.prStartOffset + Length('begin'),
             Format(fProject.prIntegratorEnterProcess, [nameId, nameId]));
-          // << BW Soluções - Alisson - 07/07/2023
+          // << Modificado: 07/07/2023
 
         if haveInst then
           lGpParserTextReplacer.Remove_SetNameThreadForDebugging(pr.unSetThreadNames);
@@ -1340,17 +1340,17 @@ begin { TUnit.Instrument }
           LFileEdit.Insert(pr.prEndOffset, Format(fProject.prIntegratorExitAsm, [nameId]))
         else
 //          LFileEdit.Insert(pr.prEndOffset, Format(fProject.prProfileExitProc, [nameId]));
-          // >> BW Soluções - Alisson - 09/08/2023
+          // >> Modificado: 09/08/2023
 //          if ((LocateUnit('System.SysUtils') <> nil) or (LocateUnit('SysUtils') <> nil)) then
-            // >> BW Soluções - Alisson - 07/07/2023
+            // >> Modificado: 07/07/2023
 //            LFileEdit.Insert(pr.prEndOffset, Format(fProject.prProfileExitProc, [nameId]));
           LFileEdit.Insert(pr.prEndOffset, Format(fProject.prIntegratorExitProcess, [nameId, nameId]));
-            // << BW Soluções - Alisson - 07/07/2023
+            // << Modificado: 07/07/2023
 //          else
-            // >> BW Soluções - Alisson - 07/07/2023
+            // >> Modificado: 07/07/2023
 //            LFileEdit.Insert(pr.prEndOffset, Format(fProject.prIntegratorExitProcSysUtils, [nameId, nameId]));
-            // << BW Soluções - Alisson - 07/07/2023
-          // << BW Soluções - Alisson - 09/08/2023
+            // << Modificado: 07/07/2023
+          // << Modificado: 09/08/2023
       end;
     end;
     LProcEnumor.Free;
