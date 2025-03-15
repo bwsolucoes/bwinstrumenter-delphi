@@ -946,7 +946,7 @@ end;
 
 procedure TfrmMain.SetCaption;
 begin
-  Caption := 'BWInstrumenter 2023 - '+ GetVersion(verShort2to3)+' ';
+  Caption := 'BWInstrumenter 2025 - '+ GetVersion(verShort2to4)+' ';
   if PageControl1.ActivePage = tabInstrumentation then
     Caption := Caption+IFF(currentProject <> '',' - '+currentProject,'')
   else

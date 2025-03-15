@@ -1649,7 +1649,7 @@ function TreeFromNode(Node: PVirtualNode): TBaseVirtualTree;
 
 implementation
 
-{$R VirtualTrees.res}
+//{$R VirtualTrees.res}
 
 uses
   Vcl.Consts,

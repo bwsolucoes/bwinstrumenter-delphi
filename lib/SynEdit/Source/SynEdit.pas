@@ -1185,7 +1185,7 @@ type
 
 implementation
 
-{$R SynEdit.res}
+//{$R SynEdit.res}
 
 uses
 {$IFDEF SYN_COMPILER_6_UP}

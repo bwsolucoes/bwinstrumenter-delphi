@@ -11,7 +11,7 @@ object frmMain: TfrmMain
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
-  TextHeight = 25
+  TextHeight = 15
   object StatusBar: TStatusBar
     Left = 0
     Top = 580
@@ -40,18 +40,16 @@ object frmMain: TfrmMain
     object Panel1: TPanel
       Left = 0
       Top = 0
-      Width = 1166
-      Height = 598
+      Width = 1156
+      Height = 580
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 0
-      ExplicitWidth = 1156
-      ExplicitHeight = 580
       object PageControl1: TPageControl
         Left = 0
         Top = 0
-        Width = 1166
-        Height = 598
+        Width = 1156
+        Height = 580
         ActivePage = tabInstrumentation
         Align = alClient
         HotTrack = True
@@ -63,7 +61,7 @@ object frmMain: TfrmMain
           object tbrInstrument: TToolBar
             Left = 0
             Top = 0
-            Width = 1158
+            Width = 1148
             Height = 54
             AutoSize = True
             ButtonHeight = 54
@@ -76,7 +74,6 @@ object frmMain: TfrmMain
             ShowCaptions = True
             ShowHint = True
             TabOrder = 0
-            ExplicitWidth = 1148
             object btnOpenProject: TToolButton
               Left = 0
               Top = 0
@@ -85,14 +82,14 @@ object frmMain: TfrmMain
               Style = tbsDropDown
             end
             object btnRescanProject: TToolButton
-              Left = 169
+              Left = 159
               Top = 0
               Action = actRescanProject
               ImageIndex = 1
               Style = tbsTextButton
             end
             object btnInstrumentDelimiter1: TToolButton
-              Left = 313
+              Left = 303
               Top = 0
               Width = 5
               Caption = 'btnInstrumentDelimiter1'
@@ -100,21 +97,21 @@ object frmMain: TfrmMain
               Style = tbsSeparator
             end
             object btnInstrument: TToolButton
-              Left = 318
+              Left = 308
               Top = 0
               Action = actInstrument
               ImageIndex = 3
               Style = tbsTextButton
             end
             object btnRemoveInstrumentation: TToolButton
-              Left = 462
+              Left = 452
               Top = 0
               Action = actRemoveInstrumentation
               ImageIndex = 4
               Style = tbsTextButton
             end
             object btnInstrumentDelimiter2: TToolButton
-              Left = 606
+              Left = 596
               Top = 0
               Width = 5
               Caption = 'btnInstrumentDelimiter2'
@@ -122,7 +119,7 @@ object frmMain: TfrmMain
               Style = tbsSeparator
             end
             object btnProjectOptions: TToolButton
-              Left = 611
+              Left = 601
               Top = 0
               Action = actProjectOptions
               ParentShowHint = False

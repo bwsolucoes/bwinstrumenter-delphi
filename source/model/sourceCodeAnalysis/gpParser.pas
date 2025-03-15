@@ -8,9 +8,10 @@ uses
   System.SysUtils,
   System.Classes,
   System.Generics.Collections,
+  System.UITypes,
   gppIDT,
   Dialogs,
-  gppTree,
+  gppTree, ShellApi,
   gpParser.BaseProject, gpParser.types, gpParser.Units, gpParser.Selections;
 
 type
@@ -282,9 +283,16 @@ var
   LHasBeenReparsed : Boolean;
   LUnitEnumor: TRootNode<TUnit>.TEnumerator;
   LOldProcs : TProcList;
+  slArquivosInstrumentados : TStringList;
+  sArquivoLog : string;
 begin
   PrepareComments(aCommentType);
   StoreExcludedUnits(aExclUnits);
+
+  try
+    sArquivoLog := 'ArqInstrumentados_' + FormatDateTime('yyyyMMddhhmmss', Now)+'.txt';
+    slArquivosInstrumentados := TStringList.Create;
+    slArquivosInstrumentados.Add('Início: '+FormatDateTime('dd/MM/yyyy hh:mm:ss', Now));
 
     LProcIdTable := TIDTable.Create;
     try
@@ -323,6 +331,7 @@ begin
               if LUnit.AnyChange or LIsAnyProcOfUnitInstrumented or LHasBeenReparsed then
               begin
                   LUnit.Instrument(LProcIdTable, aBackupFile);
+                  slArquivosInstrumentados.Add(LUnit.unFullName + ' instrumentado.');
               end
               else
                 LUnit.RegisterProcs(LProcIdTable);
@@ -335,6 +344,9 @@ begin
             ExtractFileDir(aIncFileName) + ': ' +
             SysErrorMessage(GetLastError));
         LProcIdTable.Dump(aIncFileName);
+        slArquivosInstrumentados.Add('');
+        slArquivosInstrumentados.Add('Arquivo ' + aIncFileName + ' gerado.');
+        slArquivosInstrumentados.Add('');
       finally
         SetCurrentDir(vOldCurDir);
       end;
@@ -346,6 +358,18 @@ begin
       System.SysUtils.DeleteFile(aIncFileName);
       System.SysUtils.DeleteFile(ChangeFileExt(aIncFileName, '.gpd'));
     end;
+
+  finally
+    slArquivosInstrumentados.Add('Final: '+FormatDateTime('dd/MM/yyyy hh:mm:ss', Now));
+    slArquivosInstrumentados.SaveToFile(ExtractFileDir(aIncFileName)+'\'+sArquivoLog);
+
+    if MessageDlg('Visualizar arquivo de log gerado?', TMsgDlgType.mtConfirmation, [mbYes, mbNo], 0, mbYes) = mrYes then
+       ShellExecute(GetDesktopWindow(), 'Open', PChar(ExtractFileDir(aIncFileName)+'\'+sArquivoLog), nil, nil, SW_SHOWNORMAL);
+
+    slArquivosInstrumentados.Free;
+
+  end;
+
 end; { TProject.Instrument }
 
 function TProject.NoneInstrumented(projectDirOnly: boolean): boolean;
